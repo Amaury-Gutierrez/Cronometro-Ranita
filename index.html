@@ -8,23 +8,83 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      /* Tonos de cielo claro y verde estanque */
-      background: linear-gradient(#e0f7fa, #c8f2d5);
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
       overflow: hidden;
+      
+      /* Degradado dinámico con colores de ciclo solar */
+      background: linear-gradient(135deg, 
+        #4fc3f7, /* Día */
+        #ffb74d, /* Atardecer */
+        #7e57c2, /* Anochecer */
+        #1a237e, /* Noche */
+        #ffab91, /* Amanecer */
+        #4fc3f7, /* Día */
+        #ffb74d  /* Atardecer */
+      );
+      background-size: 600% 600%;
+      animation: degradado-dia-noche 40s linear infinite;
     }
-    .fondo-granja {
+
+    @keyframes degradado-dia-noche {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    /* --- Elementos del Cielo --- */
+    .sol {
+      position: fixed;
+      top: 8%;
+      right: 15%;
+      width: 300px;
+      z-index: 0;
+      pointer-events: none;
+      animation: latido-sol 4s infinite alternate ease-in-out;
+    }
+
+    @keyframes latido-sol {
+      from { transform: scale(1); }
+      to { transform: scale(1.08); }
+    }
+
+    .nube {
+      position: fixed;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.85;
+    }
+
+    .nube-1 {
+      top: 12%;
+      width: 250px;
+      left: -200px;
+      animation: mover-nube 45s linear infinite;
+    }
+
+    .nube-2 {
+      top: 25%;
+      width: 270px;
+      left: -200px;
+      animation: mover-nube 35s linear infinite 15s;
+    }
+
+    @keyframes mover-nube {
+      0% { left: -200px; }
+      100% { left: 100vw; }
+    }
+    /* --------------------------- */
+
+    .fondo-habitat {
       position: fixed;
       left: 0;
       bottom: 0;
       width: 100%;
-      height: 70vh;
+      height: 100vh;
 
-      background-image: url("images/granja.png");
+      background-image: url("images/habitat.png");
       background-repeat: no-repeat;
       background-position: bottom center;
       background-size: 100% auto;
@@ -33,110 +93,33 @@
       pointer-events: none;
     }
 
-    .decoracion-cielo {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 55vh;
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .decoracion-cielo img {
-      position: absolute;
-      object-fit: contain;
-      user-select: none;
-      pointer-events: none;
-    }
-
-    .sol-img {
-      width: clamp(90px, 10vw, 150px);
-      top: 4vh;
-      right: 25vw;
-      animation: brillo-sol 3s ease-in-out infinite alternate;
-    }
-
-    .nube-img {
-      opacity: 0.95;
-      filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.08));
-    }
-
-    .nube-1 {
-      width: clamp(130px, 16vw, 240px);
-      top: 15vh;
-      left: 15vw;
-      animation: flotar-nube-1 5s ease-in-out infinite alternate;
-    }
-
-    .nube-2 {
-      width: clamp(110px, 13vw, 210px);
-      top: 24vh;
-      right: 15vw;
-      opacity: 0.85;
-      animation: flotar-nube-2 6s ease-in-out infinite alternate;
-    }
-
-    .nube-3 {
-      width: clamp(170px, 10vw, 300px);
-      top: 3vh;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1;
-      animation: flotar-nube-ranita 4.5s ease-in-out infinite alternate;
-    }
-
-    @keyframes flotar-nube-1 {
-      from { transform: translateY(0); }
-      to { transform: translateY(10px); }
-    }
-
-    @keyframes flotar-nube-2 {
-      from { transform: translateY(0) translateX(0); }
-      to { transform: translateY(-8px) translateX(-10px); }
-    }
-
-    @keyframes flotar-nube-ranita {
-      from { transform: translateX(-50%) translateY(0) rotate(-1deg); }
-      to { transform: translateX(-50%) translateY(12px) rotate(1deg); }
-    }
-
-    @keyframes brillo-sol {
-      from {
-        transform: scale(1);
-        filter: drop-shadow(0 0 4px rgba(255, 196, 0, 0.4));
-      }
-      to {
-        transform: scale(1.05);
-        filter: drop-shadow(0 0 14px rgba(255, 196, 0, 0.65));
-      }
-    }
-
     #pasto-ranitas {
       position: fixed;
       left: 0;
       bottom: 0;
       width: 100%;
-      height: 20vh;
+      /* Altura de la base para que brinquen contenidas en el piso del hábitat */
+      height: 25vh; 
       z-index: 1;
-      overflow: hidden;
+      /* overflow visible permite que las ranas salten "hacia arriba" sin cortarse */
+      overflow: visible; 
       pointer-events: none;
     }
     
-    .ranita-suelta {
+    .rana-suelta {
       position: absolute;
-      font-size: 75px;
+      width: 200px; 
+      height: 200px;
+      object-fit: contain;
       cursor: grab;
       user-select: none;
       touch-action: none;
       pointer-events: auto;
-      transition: transform 0.15s;
+      filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.3));
     }
     
-    .ranita-suelta:active {
+    .rana-suelta:active {
       cursor: grabbing;
-      transform: scale(1.15);
     }
 
     .nombre-autor {
@@ -145,7 +128,6 @@
       left: 50%;
       transform: translateX(-50%);
 
-      /* Colores verdes acordes a la ranita */
       background-color: #dcedc1;
       color: #3b5323;
       border: 3px solid #689f38;
@@ -163,13 +145,12 @@
     .contenedor {
       position: relative;
       z-index: 2;
-      /* Fondo ligeramente verde/amarillento */
       background-color: rgba(241, 248, 233, 0.95);
       border: 5px solid #689f38;
       border-radius: 30px;
       padding: 45px 50px;
       text-align: center;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
       width: 520px;     
       min-height: 320px; 
       backdrop-filter: blur(2px);
@@ -181,7 +162,7 @@
       font-size: 50px;
     }
     
-    .ranita {
+    .ranita-icono {
       font-size: 100px;
       margin: 10px 0;
       animation: saltito 1s infinite alternate;
@@ -225,7 +206,6 @@
     }
 
     #reiniciar {
-      /* Un azul agua para contrastar con el tema verde */
       background-color: #039be5;
       color: white;
     }
@@ -234,25 +214,16 @@
       transform: scale(1.08);
       opacity: 0.9;
     }
-    
-    .mensaje {
-      color: #3b5323;
-      font-size: 16px;
-      margin-top: 15px;
-    }
   </style>
 </head>
 
 <body>
-  <div class="decoracion-cielo">
-    <img src="images/sol.png" class="sol-img" alt="Sol">
 
-    <img src="images/nube1.png" class="nube-img nube-1" alt="Nube">
-    <img src="images/nube2.png" class="nube-img nube-2" alt="Nube">
-    <img src="images/nube3.png" class="nube-img nube-3" alt="Nube ranita">
-  </div>
+  <img src="images/sol.png" class="sol" alt="Sol">
+  <img src="images/nube.png" class="nube nube-1" alt="Nube 1">
+  <img src="images/nube.png" class="nube nube-2" alt="Nube 2">
 
-  <div class="fondo-granja"></div>
+  <div class="fondo-habitat"></div>
 
   <div id="pasto-ranitas"></div>
 
@@ -262,7 +233,7 @@
 
     <h1>Cronómetro Ranita</h1>
 
-    <div class="ranita">🐸</div>
+    <div class="ranita-icono">🐸</div>
 
     <div id="tiempo">00:00.00</div>
 
@@ -288,19 +259,14 @@
 
   const pasto_ranitas = document.getElementById("pasto-ranitas");
 
-  const tiempo_entre_ranitas = 1 * 60 * 1000;
-  const velocidad_ranita = 1.5;
-
-  // Dejé la misma ruta del audio por si no has cambiado el archivo aún
-  const sonido_ranita = new Audio("audio/sonido_pollito.mp3");
-  sonido_ranita.volume = 1;
-  sonido_ranita.preload = "auto";
-
+  const tiempo_entre_ranitas = 1 * 60 * 1000; // 1 minuto
+  
   let ranitas = [];
-  let intervalo_ranitas = null;
   let animacion_ranitas = null;
   let ranitas_activas = false;
-  let siguiente_ranita_ms = tiempo_entre_ranitas;
+  
+  // Inicia en 0 para que aparezca la primera rana al instante de presionar Play
+  let siguiente_ranita_ms = 0;
 
   function mostrar_tiempo(ms) {
     let minutos = Math.floor(ms / 60000);
@@ -319,7 +285,8 @@
       siguiente_ranita_ms <= limite &&
       transcurrido >= siguiente_ranita_ms
     ) {
-      crear_ranita();
+      let minuto_actual = Math.floor(siguiente_ranita_ms / 60000);
+      crear_ranita(minuto_actual);
       siguiente_ranita_ms += tiempo_entre_ranitas;
     }
   }
@@ -339,7 +306,6 @@
       tiempo_acumulado = limite;
 
       detener_ranitas();
-
       return;
     }
 
@@ -350,9 +316,7 @@
   function iniciar_cronometro() {
     if (intervalo === null && tiempo_acumulado < limite) {
       tiempo_inicio = performance.now();
-
       intervalo = setInterval(actualizar_cronometro, 10);
-
       iniciar_ranitas();
     }
   }
@@ -360,10 +324,8 @@
   function detener_cronometro() {
     if (intervalo !== null) {
       tiempo_acumulado += performance.now() - tiempo_inicio;
-
       clearInterval(intervalo);
       intervalo = null;
-
       detener_ranitas();
     }
   }
@@ -375,39 +337,32 @@
     tiempo_inicio = null;
 
     mostrar_tiempo(0);
-
     reiniciar_ranitas();
   }
 
-  function reproducir_sonido_ranita() {
-    const sonido = sonido_ranita.cloneNode();
-    sonido.volume = sonido_ranita.volume;
+  function crear_ranita(minuto) {
+    const ranita = document.createElement("img");
+    ranita.classList.add("rana-suelta");
+    ranita.draggable = false;
 
-    sonido.play().catch(() => {
-    });
-  }
-
-  function crear_ranita() {
-    const ranita = document.createElement("div");
-    ranita.classList.add("ranita-suelta");
-    ranita.textContent = "🐸";
+    // Alternar entre los dos prototipos según el minuto
+    const imagenes = ["images/rana.png", "images/rana_rey.png"];
+    ranita.src = imagenes[minuto % 2];
 
     pasto_ranitas.appendChild(ranita);
-    reproducir_sonido_ranita();  
 
-    const size = ranita.offsetWidth || 42;
+    const size = 80;
     const ancho = pasto_ranitas.clientWidth;
     const alto = pasto_ranitas.clientHeight;
 
-    const x = Math.random() * (ancho - size);
-    const y = Math.random() * (alto - size);
-
     const datos = {
       elemento: ranita,
-      x,
-      y,
-      dx: (Math.random() - 0.5) * velocidad_ranita * 2,
-      dy: (Math.random() - 0.5) * velocidad_ranita * 2,
+      x: Math.random() * (ancho - size), // Posición horizontal
+      y: Math.random() * (alto - size),  // Base de profundidad en el pasto
+      z: 0,                              // Altura del brinco (gravedad)
+      dx: (Math.random() < 0.5 ? 1 : -1) * (Math.random() * 1.5 + 1), // Velocidad X
+      dz: 0,                             // Velocidad de salto
+      esperando: 0,                      // Pausa entre saltos
       arrastrando: false
     };
 
@@ -425,9 +380,9 @@
 
     ranita.addEventListener("pointerdown", (e) => {
       datos.arrastrando = true;
+      datos.z = 0; // Se resetea el salto al atraparla
 
       const rect = ranita.getBoundingClientRect();
-
       offsetX = e.clientX - rect.left;
       offsetY = e.clientY - rect.top;
 
@@ -448,9 +403,8 @@
 
     ranita.addEventListener("pointerup", () => {
       datos.arrastrando = false;
-
-      datos.dx = (Math.random() - 0.5) * velocidad_ranita * 2;
-      datos.dy = (Math.random() - 0.5) * velocidad_ranita * 2;
+      datos.dz = -(Math.random() * 4 + 6); // Brinca de inmediato al soltarla
+      datos.dx = (Math.random() < 0.5 ? 1 : -1) * (Math.random() * 1.5 + 1);
     });
 
     ranita.addEventListener("pointercancel", () => {
@@ -459,17 +413,24 @@
   }
 
   function limitar_ranita_al_pasto(datos) {
-    const size = datos.elemento.offsetWidth || 42;
     const ancho = pasto_ranitas.clientWidth;
     const alto = pasto_ranitas.clientHeight;
+    const size = 80;
 
     datos.x = Math.max(0, Math.min(ancho - size, datos.x));
     datos.y = Math.max(0, Math.min(alto - size, datos.y));
   }
 
   function actualizar_posicion_ranita(datos) {
+    // Top se define combinando la base Y (profundidad en el pasto) y Z (el brinco)
     datos.elemento.style.left = datos.x + "px";
-    datos.elemento.style.top = datos.y + "px";
+    datos.elemento.style.top = (datos.y + datos.z) + "px";
+
+    // Efecto espejo y aumento al arrastrar
+    let direccion = datos.dx < 0 ? -1 : 1; 
+    let escala = datos.arrastrando ? 1.2 : 1;
+    
+    datos.elemento.style.transform = `scaleX(${direccion * escala}) scaleY(${escala})`;
   }
 
   function mover_ranitas() {
@@ -478,24 +439,37 @@
     ranitas.forEach(datos => {
       if (datos.arrastrando) return;
 
-      datos.x += datos.dx;
-      datos.y += datos.dy;
+      if (datos.esperando > 0) {
+        datos.esperando--; // Se queda quieta
+      } else {
+        // Aplica físicas
+        datos.x += datos.dx;
+        datos.z += datos.dz;
+        datos.dz += 0.45; // Gravedad del salto
 
-      const size = datos.elemento.offsetWidth || 42;
-      const ancho = pasto_ranitas.clientWidth;
-      const alto = pasto_ranitas.clientHeight;
+        const ancho = pasto_ranitas.clientWidth;
+        const size = 80;
 
-      if (datos.x <= 0 || datos.x >= ancho - size) {
-        datos.dx *= -1;
-      }
+        // Si choca con una pared lateral, voltea
+        if (datos.x <= 0 || datos.x >= ancho - size) {
+          datos.dx *= -1;
+          datos.x = Math.max(0, Math.min(ancho - size, datos.x));
+        }
 
-      if (datos.y <= 0 || datos.y >= alto - size) {
-        datos.dy *= -1;
-      }
-
-      if (Math.random() < 0.02) {
-        datos.dx = (Math.random() - 0.5) * velocidad_ranita * 2;
-        datos.dy = (Math.random() - 0.5) * velocidad_ranita * 2;
+        // Si toca el suelo (Z deja de ser negativo)
+        if (datos.z >= 0) {
+          datos.z = 0;
+          datos.dz = 0;
+          
+          // A veces descansa, a veces sigue saltando
+          if (Math.random() < 0.35) {
+            datos.esperando = Math.floor(Math.random() * 40) + 20; 
+          } else {
+            datos.dz = -(Math.random() * 4 + 6); // Fuerza de salto
+            let dir_actual = Math.sign(datos.dx) || 1;
+            datos.dx = dir_actual * (Math.random() * 1.5 + 1);
+          }
+        }
       }
 
       limitar_ranita_al_pasto(datos);
@@ -515,8 +489,10 @@
   function detener_ranitas() {
     ranitas_activas = false;
 
-    cancelAnimationFrame(animacion_ranitas);
-    animacion_ranitas = null;
+    if (animacion_ranitas !== null) {
+      cancelAnimationFrame(animacion_ranitas);
+      animacion_ranitas = null;
+    }
   }
 
   function reiniciar_ranitas() {
@@ -527,7 +503,7 @@
     });
 
     ranitas = [];
-    siguiente_ranita_ms = tiempo_entre_ranitas;
+    siguiente_ranita_ms = 0;
   }
 
   boton_play.addEventListener("click", iniciar_cronometro);
