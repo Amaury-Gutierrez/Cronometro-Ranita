@@ -2,13 +2,14 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Cronómetro Ranita</title>
+  <title>Cronómetro Panda</title>
 
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(#dff4ff, #fff2b3);
+      /* Tonos de verde claro tipo bambú */
+      background: linear-gradient(#e8f5e9, #c8e6c9);
       height: 100vh;
       display: flex;
       justify-content: center;
@@ -16,14 +17,14 @@
       position: relative;
       overflow: hidden;
     }
-    .fondo-granja {
+    .fondo-bambu {
       position: fixed;
       left: 0;
       bottom: 0;
       width: 100%;
       height: 70vh;
 
-      background-image: url("images/granja.png");
+      background-image: url("images/granja.png"); /* Cambiar a imagen de bosque/bambú después */
       background-repeat: no-repeat;
       background-position: bottom center;
       background-size: 100% auto;
@@ -83,48 +84,36 @@
       left: 50%;
       transform: translateX(-50%);
       z-index: 1;
-      animation: flotar-nube-pollito 4.5s ease-in-out infinite alternate;
+      animation: flotar-nube-panda 4.5s ease-in-out infinite alternate;
     }
 
     @keyframes flotar-nube-1 {
-      from {
-        transform: translateY(0);
-      }
-      to {
-        transform: translateY(10px);
-      }
+      from { transform: translateY(0); }
+      to { transform: translateY(10px); }
     }
 
     @keyframes flotar-nube-2 {
-      from {
-        transform: translateY(0) translateX(0);
-      }
-      to {
-        transform: translateY(-8px) translateX(-10px);
-      }
+      from { transform: translateY(0) translateX(0); }
+      to { transform: translateY(-8px) translateX(-10px); }
     }
 
-    @keyframes flotar-nube-pollito {
-      from {
-        transform: translateX(-50%) translateY(0) rotate(-1deg);
-      }
-      to {
-        transform: translateX(-50%) translateY(12px) rotate(1deg);
-      }
+    @keyframes flotar-nube-panda {
+      from { transform: translateX(-50%) translateY(0) rotate(-1deg); }
+      to { transform: translateX(-50%) translateY(12px) rotate(1deg); }
     }
 
     @keyframes brillo-sol {
       from {
         transform: scale(1);
-        filter: drop-shadow(0 0 4px rgba(255, 196, 0, 0.4));
+        filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
       }
       to {
         transform: scale(1.05);
-        filter: drop-shadow(0 0 14px rgba(255, 196, 0, 0.65));
+        filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.8));
       }
     }
 
-    #pasto-pollitos {
+    #suelo-pandas {
       position: fixed;
       left: 0;
       bottom: 0;
@@ -134,7 +123,7 @@
       overflow: hidden;
       pointer-events: none;
     }
-    .pollito-suelto {
+    .panda-suelto {
       position: absolute;
       font-size: 75px;
       cursor: grab;
@@ -143,7 +132,7 @@
       pointer-events: auto;
       transition: transform 0.15s;
     }
-    .pollito-suelto:active {
+    .panda-suelto:active {
       cursor: grabbing;
       transform: scale(1.15);
     }
@@ -154,9 +143,10 @@
       left: 50%;
       transform: translateX(-50%);
 
-      background-color: #fff1a8;
-      color: #9a6500;
-      border: 3px solid #f4b400;
+      /* Colores blanco y negro de panda con borde verde bambú */
+      background-color: #ffffff;
+      color: #212121;
+      border: 3px solid #388e3c;
       border-radius: 18px;
 
       padding: 8px 22px;
@@ -171,8 +161,8 @@
     .contenedor {
       position: relative;
       z-index: 2;
-      background-color: rgba(255, 248, 220, 0.95);
-      border: 5px solid #f4b400;
+      background-color: rgba(255, 255, 255, 0.95);
+      border: 5px solid #2e7d32; /* Verde oscuro */
       border-radius: 30px;
       padding: 45px 50px;
       text-align: center;
@@ -183,34 +173,31 @@
     }
 
     h1 {
-      color: #d18b00;
+      color: #1b5e20; /* Verde más oscuro para el título */
       margin-bottom: 10px;
       font-size: 50px;
     }
-    .pollito {
+    .panda-icono {
       font-size: 100px;
       margin: 10px 0;
       animation: saltito 1s infinite alternate;
     }
 
     @keyframes saltito {
-      from {
-        transform: translateY(0);
-      }
-      to {
-        transform: translateY(-10px);
-      }
+      from { transform: translateY(0); }
+      to { transform: translateY(-10px); }
     }
 
     #tiempo {
       font-size: 48px;
       font-weight: bold;
-      color: #7a4b00;
+      /* Fondo oscuro y texto claro emulando los colores del panda */
+      color: #ffffff;
       margin: 25px 0;
-      background-color: #fff1a8;
+      background-color: #212121;
       padding: 15px;
       border-radius: 20px;
-      border: 3px dashed #f4b400;
+      border: 3px dashed #4caf50;
     }
     .botones button {
       font-size: 18px;
@@ -224,17 +211,17 @@
     }
 
     #play {
-      background-color: #8fd14f;
+      background-color: #4caf50; /* Verde bambú */
       color: white;
     }
 
     #detener {
-      background-color: #ff5757;
+      background-color: #d32f2f; /* Rojo oscuro para contraste */
       color: white;
     }
 
     #reiniciar {
-      background-color: #ff914d;
+      background-color: #607d8b; /* Gris oscuro en lugar de naranja */
       color: white;
     }
 
@@ -242,34 +229,27 @@
       transform: scale(1.08);
       opacity: 0.9;
     }
-    .mensaje {
-      color: #9a6500;
-      font-size: 16px;
-      margin-top: 15px;
-    }
   </style>
 </head>
 
 <body>
   <div class="decoracion-cielo">
     <img src="images/sol.png" class="sol-img" alt="Sol">
-
     <img src="images/nube1.png" class="nube-img nube-1" alt="Nube">
     <img src="images/nube2.png" class="nube-img nube-2" alt="Nube">
-    <img src="images/nube3.png" class="nube-img nube-3" alt="Nube pollito">
+    <img src="images/nube3.png" class="nube-img nube-3" alt="Nube panda">
   </div>
 
-  <div class="fondo-granja"></div>
+  <div class="fondo-bambu"></div>
 
-  <div id="pasto-pollitos"></div>
+  <div id="suelo-pandas"></div>
 
   <div class="contenedor">
+    <div class="nombre-autor">🐼 Katia Sánchez Hernández 🐼</div>
 
-    <div class="nombre-autor">🐸 Lizy Morales Sánchez 🐸</div>
+    <h1>Cronómetro Panda</h1>
 
-    <h1>Cronómetro Ranita</h1>
-
-    <div class="pollito">🐸</div>
+    <div class="panda-icono">🐼</div>
 
     <div id="tiempo">00:00.00</div>
 
@@ -278,7 +258,6 @@
       <button id="detener">⏸️ Detener</button>
       <button id="reiniciar">🔄 Reiniciar</button>
     </div>
-
   </div>
 
 <script>
@@ -293,22 +272,20 @@
   const boton_detener = document.getElementById("detener");
   const boton_reiniciar = document.getElementById("reiniciar");
 
+  const suelo_pandas = document.getElementById("suelo-pandas");
 
-  const pasto_pollitos = document.getElementById("pasto-pollitos");
+  const tiempo_entre_pandas = 1 * 60 * 1000;
+  const velocidad_panda = 1.5;
 
-  const tiempo_entre_pollitos = 1 * 60 * 1000;
-  const velocidad_pollito = 1.5;
+  // Actualiza esta ruta cuando tengas tu nuevo archivo de audio
+  const sonido_panda = new Audio("audio/sonido_pollito.mp3"); 
+  sonido_panda.volume = 1;
+  sonido_panda.preload = "auto";
 
-  const sonido_pollito = new Audio("audio/sonido_pollito.mp3");
-  sonido_pollito.volume = 1;
-  sonido_pollito.preload = "auto";
-
-  let pollitos = [];
-  let intervalo_pollitos = null;
-  let animacion_pollitos = null;
-  let pollitos_activos = false;
-  let siguiente_pollito_ms = tiempo_entre_pollitos;
-
+  let pandas_array = [];
+  let animacion_pandas = null;
+  let pandas_activos = false;
+  let siguiente_panda_ms = tiempo_entre_pandas;
 
   function mostrar_tiempo(ms) {
     let minutos = Math.floor(ms / 60000);
@@ -322,15 +299,15 @@
     tiempo.textContent = minutos_texto + ":" + segundos_texto + "." + milesimas_texto;
   }
 
-  function generar_pollitos_por_tiempo(transcurrido) {
-  while (
-    siguiente_pollito_ms <= limite &&
-    transcurrido >= siguiente_pollito_ms
-  ) {
-    crear_pollito();
-    siguiente_pollito_ms += tiempo_entre_pollitos;
+  function generar_pandas_por_tiempo(transcurrido) {
+    while (
+      siguiente_panda_ms <= limite &&
+      transcurrido >= siguiente_panda_ms
+    ) {
+      crear_panda();
+      siguiente_panda_ms += tiempo_entre_pandas;
+    }
   }
-}
 
   function actualizar_cronometro() {
     let ahora = performance.now();
@@ -339,40 +316,35 @@
     if (transcurrido >= limite) {
       transcurrido = limite;
 
-      generar_pollitos_por_tiempo(transcurrido);
+      generar_pandas_por_tiempo(transcurrido);
       mostrar_tiempo(transcurrido);
 
       clearInterval(intervalo);
       intervalo = null;
       tiempo_acumulado = limite;
 
-      detener_pollitos();
-
+      detener_pandas();
       return;
     }
 
-    generar_pollitos_por_tiempo(transcurrido);
+    generar_pandas_por_tiempo(transcurrido);
     mostrar_tiempo(transcurrido);
   }
 
   function iniciar_cronometro() {
     if (intervalo === null && tiempo_acumulado < limite) {
       tiempo_inicio = performance.now();
-
       intervalo = setInterval(actualizar_cronometro, 10);
-
-      iniciar_pollitos();
+      iniciar_pandas();
     }
   }
 
   function detener_cronometro() {
     if (intervalo !== null) {
       tiempo_acumulado += performance.now() - tiempo_inicio;
-
       clearInterval(intervalo);
       intervalo = null;
-
-      detener_pollitos();
+      detener_pandas();
     }
   }
 
@@ -383,119 +355,110 @@
     tiempo_inicio = null;
 
     mostrar_tiempo(0);
-
-    reiniciar_pollitos();
+    reiniciar_pandas();
   }
 
-
-
-  function reproducir_sonido_pollito() {
-    const sonido = sonido_pollito.cloneNode();
-    sonido.volume = sonido_pollito.volume;
-
-    sonido.play().catch(() => {
-    });
+  function reproducir_sonido_panda() {
+    const sonido = sonido_panda.cloneNode();
+    sonido.volume = sonido_panda.volume;
+    sonido.play().catch(() => {});
   }
 
+  function crear_panda() {
+    const panda = document.createElement("div");
+    panda.classList.add("panda-suelto");
+    panda.textContent = "🐼";
 
+    suelo_pandas.appendChild(panda);
+    reproducir_sonido_panda();  
 
-  function crear_pollito() {
-    const pollito = document.createElement("div");
-    pollito.classList.add("pollito-suelto");
-    pollito.textContent = "🐸";
-
-    pasto_pollitos.appendChild(pollito);
-    reproducir_sonido_pollito();  
-
-    const size = pollito.offsetWidth || 42;
-    const ancho = pasto_pollitos.clientWidth;
-    const alto = pasto_pollitos.clientHeight;
+    const size = panda.offsetWidth || 42;
+    const ancho = suelo_pandas.clientWidth;
+    const alto = suelo_pandas.clientHeight;
 
     const x = Math.random() * (ancho - size);
     const y = Math.random() * (alto - size);
 
     const datos = {
-      elemento: pollito,
+      elemento: panda,
       x,
       y,
-      dx: (Math.random() - 0.5) * velocidad_pollito * 2,
-      dy: (Math.random() - 0.5) * velocidad_pollito * 2,
+      dx: (Math.random() - 0.5) * velocidad_panda * 2,
+      dy: (Math.random() - 0.5) * velocidad_panda * 2,
       arrastrando: false
     };
 
-    actualizar_posicion_pollito(datos);
-    activar_arrastre_pollito(datos);
+    actualizar_posicion_panda(datos);
+    activar_arrastre_panda(datos);
 
-    pollitos.push(datos);
+    pandas_array.push(datos);
   }
 
-  function activar_arrastre_pollito(datos) {
-    const pollito = datos.elemento;
+  function activar_arrastre_panda(datos) {
+    const panda = datos.elemento;
 
     let offsetX = 0;
     let offsetY = 0;
 
-    pollito.addEventListener("pointerdown", (e) => {
+    panda.addEventListener("pointerdown", (e) => {
       datos.arrastrando = true;
-
-      const rect = pollito.getBoundingClientRect();
+      const rect = panda.getBoundingClientRect();
 
       offsetX = e.clientX - rect.left;
       offsetY = e.clientY - rect.top;
 
-      pollito.setPointerCapture(e.pointerId);
+      panda.setPointerCapture(e.pointerId);
     });
 
-    pollito.addEventListener("pointermove", (e) => {
+    panda.addEventListener("pointermove", (e) => {
       if (!datos.arrastrando) return;
 
-      const rect_pasto = pasto_pollitos.getBoundingClientRect();
+      const rect_suelo = suelo_pandas.getBoundingClientRect();
 
-      datos.x = e.clientX - rect_pasto.left - offsetX;
-      datos.y = e.clientY - rect_pasto.top - offsetY;
+      datos.x = e.clientX - rect_suelo.left - offsetX;
+      datos.y = e.clientY - rect_suelo.top - offsetY;
 
-      limitar_pollito_al_pasto(datos);
-      actualizar_posicion_pollito(datos);
+      limitar_panda_al_suelo(datos);
+      actualizar_posicion_panda(datos);
     });
 
-    pollito.addEventListener("pointerup", () => {
+    panda.addEventListener("pointerup", () => {
       datos.arrastrando = false;
-
-      datos.dx = (Math.random() - 0.5) * velocidad_pollito * 2;
-      datos.dy = (Math.random() - 0.5) * velocidad_pollito * 2;
+      datos.dx = (Math.random() - 0.5) * velocidad_panda * 2;
+      datos.dy = (Math.random() - 0.5) * velocidad_panda * 2;
     });
 
-    pollito.addEventListener("pointercancel", () => {
+    panda.addEventListener("pointercancel", () => {
       datos.arrastrando = false;
     });
   }
 
-  function limitar_pollito_al_pasto(datos) {
+  function limitar_panda_al_suelo(datos) {
     const size = datos.elemento.offsetWidth || 42;
-    const ancho = pasto_pollitos.clientWidth;
-    const alto = pasto_pollitos.clientHeight;
+    const ancho = suelo_pandas.clientWidth;
+    const alto = suelo_pandas.clientHeight;
 
     datos.x = Math.max(0, Math.min(ancho - size, datos.x));
     datos.y = Math.max(0, Math.min(alto - size, datos.y));
   }
 
-  function actualizar_posicion_pollito(datos) {
+  function actualizar_posicion_panda(datos) {
     datos.elemento.style.left = datos.x + "px";
     datos.elemento.style.top = datos.y + "px";
   }
 
-  function mover_pollitos() {
-    if (!pollitos_activos) return;
+  function mover_pandas() {
+    if (!pandas_activos) return;
 
-    pollitos.forEach(datos => {
+    pandas_array.forEach(datos => {
       if (datos.arrastrando) return;
 
       datos.x += datos.dx;
       datos.y += datos.dy;
 
       const size = datos.elemento.offsetWidth || 42;
-      const ancho = pasto_pollitos.clientWidth;
-      const alto = pasto_pollitos.clientHeight;
+      const ancho = suelo_pandas.clientWidth;
+      const alto = suelo_pandas.clientHeight;
 
       if (datos.x <= 0 || datos.x >= ancho - size) {
         datos.dx *= -1;
@@ -506,43 +469,41 @@
       }
 
       if (Math.random() < 0.02) {
-        datos.dx = (Math.random() - 0.5) * velocidad_pollito * 2;
-        datos.dy = (Math.random() - 0.5) * velocidad_pollito * 2;
+        datos.dx = (Math.random() - 0.5) * velocidad_panda * 2;
+        datos.dy = (Math.random() - 0.5) * velocidad_panda * 2;
       }
 
-      limitar_pollito_al_pasto(datos);
-      actualizar_posicion_pollito(datos);
+      limitar_panda_al_suelo(datos);
+      actualizar_posicion_panda(datos);
     });
 
-    animacion_pollitos = requestAnimationFrame(mover_pollitos);
+    animacion_pandas = requestAnimationFrame(mover_pandas);
   }
 
-  function iniciar_pollitos() {
-    if (pollitos_activos) return;
+  function iniciar_pandas() {
+    if (pandas_activos) return;
 
-    pollitos_activos = true;
-    mover_pollitos();
+    pandas_activos = true;
+    mover_pandas();
   }
 
-  function detener_pollitos() {
-    pollitos_activos = false;
+  function detener_pandas() {
+    pandas_activos = false;
 
-    cancelAnimationFrame(animacion_pollitos);
-    animacion_pollitos = null;
+    cancelAnimationFrame(animacion_pandas);
+    animacion_pandas = null;
   }
 
-  function reiniciar_pollitos() {
-    detener_pollitos();
+  function reiniciar_pandas() {
+    detener_pandas();
 
-    pollitos.forEach(datos => {
+    pandas_array.forEach(datos => {
       datos.elemento.remove();
     });
 
-    pollitos = [];
-    siguiente_pollito_ms = tiempo_entre_pollitos;
+    pandas_array = [];
+    siguiente_panda_ms = tiempo_entre_pandas;
   }
-
-
 
   boton_play.addEventListener("click", iniciar_cronometro);
   boton_detener.addEventListener("click", detener_cronometro);
