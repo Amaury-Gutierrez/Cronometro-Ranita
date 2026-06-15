@@ -2,14 +2,14 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Cronómetro Panda</title>
+  <title>Cronómetro Ranita</title>
 
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      /* Tonos de verde claro tipo bambú */
-      background: linear-gradient(#e8f5e9, #c8e6c9);
+      /* Tonos de cielo claro y verde estanque */
+      background: linear-gradient(#e0f7fa, #c8f2d5);
       height: 100vh;
       display: flex;
       justify-content: center;
@@ -17,14 +17,14 @@
       position: relative;
       overflow: hidden;
     }
-    .fondo-bambu {
+    .fondo-granja {
       position: fixed;
       left: 0;
       bottom: 0;
       width: 100%;
       height: 70vh;
 
-      background-image: url("images/granja.png"); /* Cambiar a imagen de bosque/bambú después */
+      background-image: url("images/granja.png");
       background-repeat: no-repeat;
       background-position: bottom center;
       background-size: 100% auto;
@@ -84,7 +84,7 @@
       left: 50%;
       transform: translateX(-50%);
       z-index: 1;
-      animation: flotar-nube-panda 4.5s ease-in-out infinite alternate;
+      animation: flotar-nube-ranita 4.5s ease-in-out infinite alternate;
     }
 
     @keyframes flotar-nube-1 {
@@ -97,7 +97,7 @@
       to { transform: translateY(-8px) translateX(-10px); }
     }
 
-    @keyframes flotar-nube-panda {
+    @keyframes flotar-nube-ranita {
       from { transform: translateX(-50%) translateY(0) rotate(-1deg); }
       to { transform: translateX(-50%) translateY(12px) rotate(1deg); }
     }
@@ -105,15 +105,15 @@
     @keyframes brillo-sol {
       from {
         transform: scale(1);
-        filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
+        filter: drop-shadow(0 0 4px rgba(255, 196, 0, 0.4));
       }
       to {
         transform: scale(1.05);
-        filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.8));
+        filter: drop-shadow(0 0 14px rgba(255, 196, 0, 0.65));
       }
     }
 
-    #suelo-pandas {
+    #pasto-ranitas {
       position: fixed;
       left: 0;
       bottom: 0;
@@ -123,7 +123,8 @@
       overflow: hidden;
       pointer-events: none;
     }
-    .panda-suelto {
+    
+    .ranita-suelta {
       position: absolute;
       font-size: 75px;
       cursor: grab;
@@ -132,7 +133,8 @@
       pointer-events: auto;
       transition: transform 0.15s;
     }
-    .panda-suelto:active {
+    
+    .ranita-suelta:active {
       cursor: grabbing;
       transform: scale(1.15);
     }
@@ -143,10 +145,10 @@
       left: 50%;
       transform: translateX(-50%);
 
-      /* Colores blanco y negro de panda con borde verde bambú */
-      background-color: #ffffff;
-      color: #212121;
-      border: 3px solid #388e3c;
+      /* Colores verdes acordes a la ranita */
+      background-color: #dcedc1;
+      color: #3b5323;
+      border: 3px solid #689f38;
       border-radius: 18px;
 
       padding: 8px 22px;
@@ -161,8 +163,9 @@
     .contenedor {
       position: relative;
       z-index: 2;
-      background-color: rgba(255, 255, 255, 0.95);
-      border: 5px solid #2e7d32; /* Verde oscuro */
+      /* Fondo ligeramente verde/amarillento */
+      background-color: rgba(241, 248, 233, 0.95);
+      border: 5px solid #689f38;
       border-radius: 30px;
       padding: 45px 50px;
       text-align: center;
@@ -173,11 +176,12 @@
     }
 
     h1 {
-      color: #1b5e20; /* Verde más oscuro para el título */
+      color: #33691e;
       margin-bottom: 10px;
       font-size: 50px;
     }
-    .panda-icono {
+    
+    .ranita {
       font-size: 100px;
       margin: 10px 0;
       animation: saltito 1s infinite alternate;
@@ -191,14 +195,14 @@
     #tiempo {
       font-size: 48px;
       font-weight: bold;
-      /* Fondo oscuro y texto claro emulando los colores del panda */
-      color: #ffffff;
+      color: #1b5e20;
       margin: 25px 0;
-      background-color: #212121;
+      background-color: #c8e6c9;
       padding: 15px;
       border-radius: 20px;
-      border: 3px dashed #4caf50;
+      border: 3px dashed #689f38;
     }
+    
     .botones button {
       font-size: 18px;
       padding: 12px 18px;
@@ -211,17 +215,18 @@
     }
 
     #play {
-      background-color: #4caf50; /* Verde bambú */
+      background-color: #4caf50;
       color: white;
     }
 
     #detener {
-      background-color: #d32f2f; /* Rojo oscuro para contraste */
+      background-color: #e53935;
       color: white;
     }
 
     #reiniciar {
-      background-color: #607d8b; /* Gris oscuro en lugar de naranja */
+      /* Un azul agua para contrastar con el tema verde */
+      background-color: #039be5;
       color: white;
     }
 
@@ -229,27 +234,35 @@
       transform: scale(1.08);
       opacity: 0.9;
     }
+    
+    .mensaje {
+      color: #3b5323;
+      font-size: 16px;
+      margin-top: 15px;
+    }
   </style>
 </head>
 
 <body>
   <div class="decoracion-cielo">
     <img src="images/sol.png" class="sol-img" alt="Sol">
+
     <img src="images/nube1.png" class="nube-img nube-1" alt="Nube">
     <img src="images/nube2.png" class="nube-img nube-2" alt="Nube">
-    <img src="images/nube3.png" class="nube-img nube-3" alt="Nube panda">
+    <img src="images/nube3.png" class="nube-img nube-3" alt="Nube ranita">
   </div>
 
-  <div class="fondo-bambu"></div>
+  <div class="fondo-granja"></div>
 
-  <div id="suelo-pandas"></div>
+  <div id="pasto-ranitas"></div>
 
   <div class="contenedor">
-    <div class="nombre-autor">🐼 Katia Sánchez Hernández 🐼</div>
 
-    <h1>Cronómetro Panda</h1>
+    <div class="nombre-autor">🐸 Lizy Morales Sánchez 🐸</div>
 
-    <div class="panda-icono">🐼</div>
+    <h1>Cronómetro Ranita</h1>
+
+    <div class="ranita">🐸</div>
 
     <div id="tiempo">00:00.00</div>
 
@@ -258,6 +271,7 @@
       <button id="detener">⏸️ Detener</button>
       <button id="reiniciar">🔄 Reiniciar</button>
     </div>
+
   </div>
 
 <script>
@@ -272,25 +286,26 @@
   const boton_detener = document.getElementById("detener");
   const boton_reiniciar = document.getElementById("reiniciar");
 
-  const suelo_pandas = document.getElementById("suelo-pandas");
+  const pasto_ranitas = document.getElementById("pasto-ranitas");
 
-  const tiempo_entre_pandas = 1 * 60 * 1000;
-  const velocidad_panda = 1.5;
+  const tiempo_entre_ranitas = 1 * 60 * 1000;
+  const velocidad_ranita = 1.5;
 
-  // Actualiza esta ruta cuando tengas tu nuevo archivo de audio
-  const sonido_panda = new Audio("audio/sonido_pollito.mp3"); 
-  sonido_panda.volume = 1;
-  sonido_panda.preload = "auto";
+  // Dejé la misma ruta del audio por si no has cambiado el archivo aún
+  const sonido_ranita = new Audio("audio/sonido_pollito.mp3");
+  sonido_ranita.volume = 1;
+  sonido_ranita.preload = "auto";
 
-  let pandas_array = [];
-  let animacion_pandas = null;
-  let pandas_activos = false;
-  let siguiente_panda_ms = tiempo_entre_pandas;
+  let ranitas = [];
+  let intervalo_ranitas = null;
+  let animacion_ranitas = null;
+  let ranitas_activas = false;
+  let siguiente_ranita_ms = tiempo_entre_ranitas;
 
   function mostrar_tiempo(ms) {
     let minutos = Math.floor(ms / 60000);
     let segundos = Math.floor((ms % 60000) / 1000);
-    let milesimas = Math.floor((ms % 1000) /10);
+    let milesimas = Math.floor((ms % 1000) / 10);
 
     let minutos_texto = String(minutos).padStart(2, "0");
     let segundos_texto = String(segundos).padStart(2, "0");
@@ -299,13 +314,13 @@
     tiempo.textContent = minutos_texto + ":" + segundos_texto + "." + milesimas_texto;
   }
 
-  function generar_pandas_por_tiempo(transcurrido) {
+  function generar_ranitas_por_tiempo(transcurrido) {
     while (
-      siguiente_panda_ms <= limite &&
-      transcurrido >= siguiente_panda_ms
+      siguiente_ranita_ms <= limite &&
+      transcurrido >= siguiente_ranita_ms
     ) {
-      crear_panda();
-      siguiente_panda_ms += tiempo_entre_pandas;
+      crear_ranita();
+      siguiente_ranita_ms += tiempo_entre_ranitas;
     }
   }
 
@@ -316,35 +331,40 @@
     if (transcurrido >= limite) {
       transcurrido = limite;
 
-      generar_pandas_por_tiempo(transcurrido);
+      generar_ranitas_por_tiempo(transcurrido);
       mostrar_tiempo(transcurrido);
 
       clearInterval(intervalo);
       intervalo = null;
       tiempo_acumulado = limite;
 
-      detener_pandas();
+      detener_ranitas();
+
       return;
     }
 
-    generar_pandas_por_tiempo(transcurrido);
+    generar_ranitas_por_tiempo(transcurrido);
     mostrar_tiempo(transcurrido);
   }
 
   function iniciar_cronometro() {
     if (intervalo === null && tiempo_acumulado < limite) {
       tiempo_inicio = performance.now();
+
       intervalo = setInterval(actualizar_cronometro, 10);
-      iniciar_pandas();
+
+      iniciar_ranitas();
     }
   }
 
   function detener_cronometro() {
     if (intervalo !== null) {
       tiempo_acumulado += performance.now() - tiempo_inicio;
+
       clearInterval(intervalo);
       intervalo = null;
-      detener_pandas();
+
+      detener_ranitas();
     }
   }
 
@@ -355,110 +375,115 @@
     tiempo_inicio = null;
 
     mostrar_tiempo(0);
-    reiniciar_pandas();
+
+    reiniciar_ranitas();
   }
 
-  function reproducir_sonido_panda() {
-    const sonido = sonido_panda.cloneNode();
-    sonido.volume = sonido_panda.volume;
-    sonido.play().catch(() => {});
+  function reproducir_sonido_ranita() {
+    const sonido = sonido_ranita.cloneNode();
+    sonido.volume = sonido_ranita.volume;
+
+    sonido.play().catch(() => {
+    });
   }
 
-  function crear_panda() {
-    const panda = document.createElement("div");
-    panda.classList.add("panda-suelto");
-    panda.textContent = "🐼";
+  function crear_ranita() {
+    const ranita = document.createElement("div");
+    ranita.classList.add("ranita-suelta");
+    ranita.textContent = "🐸";
 
-    suelo_pandas.appendChild(panda);
-    reproducir_sonido_panda();  
+    pasto_ranitas.appendChild(ranita);
+    reproducir_sonido_ranita();  
 
-    const size = panda.offsetWidth || 42;
-    const ancho = suelo_pandas.clientWidth;
-    const alto = suelo_pandas.clientHeight;
+    const size = ranita.offsetWidth || 42;
+    const ancho = pasto_ranitas.clientWidth;
+    const alto = pasto_ranitas.clientHeight;
 
     const x = Math.random() * (ancho - size);
     const y = Math.random() * (alto - size);
 
     const datos = {
-      elemento: panda,
+      elemento: ranita,
       x,
       y,
-      dx: (Math.random() - 0.5) * velocidad_panda * 2,
-      dy: (Math.random() - 0.5) * velocidad_panda * 2,
+      dx: (Math.random() - 0.5) * velocidad_ranita * 2,
+      dy: (Math.random() - 0.5) * velocidad_ranita * 2,
       arrastrando: false
     };
 
-    actualizar_posicion_panda(datos);
-    activar_arrastre_panda(datos);
+    actualizar_posicion_ranita(datos);
+    activar_arrastre_ranita(datos);
 
-    pandas_array.push(datos);
+    ranitas.push(datos);
   }
 
-  function activar_arrastre_panda(datos) {
-    const panda = datos.elemento;
+  function activar_arrastre_ranita(datos) {
+    const ranita = datos.elemento;
 
     let offsetX = 0;
     let offsetY = 0;
 
-    panda.addEventListener("pointerdown", (e) => {
+    ranita.addEventListener("pointerdown", (e) => {
       datos.arrastrando = true;
-      const rect = panda.getBoundingClientRect();
+
+      const rect = ranita.getBoundingClientRect();
 
       offsetX = e.clientX - rect.left;
       offsetY = e.clientY - rect.top;
 
-      panda.setPointerCapture(e.pointerId);
+      ranita.setPointerCapture(e.pointerId);
     });
 
-    panda.addEventListener("pointermove", (e) => {
+    ranita.addEventListener("pointermove", (e) => {
       if (!datos.arrastrando) return;
 
-      const rect_suelo = suelo_pandas.getBoundingClientRect();
+      const rect_pasto = pasto_ranitas.getBoundingClientRect();
 
-      datos.x = e.clientX - rect_suelo.left - offsetX;
-      datos.y = e.clientY - rect_suelo.top - offsetY;
+      datos.x = e.clientX - rect_pasto.left - offsetX;
+      datos.y = e.clientY - rect_pasto.top - offsetY;
 
-      limitar_panda_al_suelo(datos);
-      actualizar_posicion_panda(datos);
+      limitar_ranita_al_pasto(datos);
+      actualizar_posicion_ranita(datos);
     });
 
-    panda.addEventListener("pointerup", () => {
+    ranita.addEventListener("pointerup", () => {
       datos.arrastrando = false;
-      datos.dx = (Math.random() - 0.5) * velocidad_panda * 2;
-      datos.dy = (Math.random() - 0.5) * velocidad_panda * 2;
+
+      datos.dx = (Math.random() - 0.5) * velocidad_ranita * 2;
+      datos.dy = (Math.random() - 0.5) * velocidad_ranita * 2;
     });
 
-    panda.addEventListener("pointercancel", () => {
+    ranita.addEventListener("pointercancel", () => {
       datos.arrastrando = false;
     });
   }
 
-  function limitar_panda_al_suelo(datos) {
+  function limitar_ranita_al_pasto(datos) {
     const size = datos.elemento.offsetWidth || 42;
-    const ancho = suelo_pandas.clientWidth;
-    const alto = suelo_pandas.clientHeight;
+    const ancho = pasto_ranitas.clientWidth;
+    const alto = pasto_ranitas.clientHeight;
 
     datos.x = Math.max(0, Math.min(ancho - size, datos.x));
     datos.y = Math.max(0, Math.min(alto - size, datos.y));
   }
 
-  function actualizar_posicion_panda(datos) {
+  function actualizar_posicion_ranita(datos) {
     datos.elemento.style.left = datos.x + "px";
     datos.elemento.style.top = datos.y + "px";
   }
 
-  function mover_pandas() {
-    if (!pandas_activos) return;
+  function mover_ranitas() {
+    if (!ranitas_activas) return;
 
-    pandas_array.forEach(datos => {
+    ranitas.forEach(datos => {
       if (datos.arrastrando) return;
 
       datos.x += datos.dx;
       datos.y += datos.dy;
 
       const size = datos.elemento.offsetWidth || 42;
-      const ancho = suelo_pandas.clientWidth;
-      const alto = suelo_pandas.clientHeight;
+      const ancho = pasto_ranitas.clientWidth;
+      const alto = pasto_ranitas.clientHeight;
 
       if (datos.x <= 0 || datos.x >= ancho - size) {
         datos.dx *= -1;
@@ -469,40 +494,40 @@
       }
 
       if (Math.random() < 0.02) {
-        datos.dx = (Math.random() - 0.5) * velocidad_panda * 2;
-        datos.dy = (Math.random() - 0.5) * velocidad_panda * 2;
+        datos.dx = (Math.random() - 0.5) * velocidad_ranita * 2;
+        datos.dy = (Math.random() - 0.5) * velocidad_ranita * 2;
       }
 
-      limitar_panda_al_suelo(datos);
-      actualizar_posicion_panda(datos);
+      limitar_ranita_al_pasto(datos);
+      actualizar_posicion_ranita(datos);
     });
 
-    animacion_pandas = requestAnimationFrame(mover_pandas);
+    animacion_ranitas = requestAnimationFrame(mover_ranitas);
   }
 
-  function iniciar_pandas() {
-    if (pandas_activos) return;
+  function iniciar_ranitas() {
+    if (ranitas_activas) return;
 
-    pandas_activos = true;
-    mover_pandas();
+    ranitas_activas = true;
+    mover_ranitas();
   }
 
-  function detener_pandas() {
-    pandas_activos = false;
+  function detener_ranitas() {
+    ranitas_activas = false;
 
-    cancelAnimationFrame(animacion_pandas);
-    animacion_pandas = null;
+    cancelAnimationFrame(animacion_ranitas);
+    animacion_ranitas = null;
   }
 
-  function reiniciar_pandas() {
-    detener_pandas();
+  function reiniciar_ranitas() {
+    detener_ranitas();
 
-    pandas_array.forEach(datos => {
+    ranitas.forEach(datos => {
       datos.elemento.remove();
     });
 
-    pandas_array = [];
-    siguiente_panda_ms = tiempo_entre_pandas;
+    ranitas = [];
+    siguiente_ranita_ms = tiempo_entre_ranitas;
   }
 
   boton_play.addEventListener("click", iniciar_cronometro);
